@@ -1,0 +1,46 @@
+@use "variables" as *;
+@use "mixins" as *;
+
+.editor {
+  .control-group {
+    min-height: rem(30);
+    padding: rem(5) rem(5);
+    display: flex;
+    padding-bottom: rem(5);
+    border-bottom: 1px solid $secondaryClr;
+    gap: rem(10);
+    .button-group {
+      display: flex;
+      gap: rem(3);
+      &:not(:last-child) {
+        padding-right: rem(5);
+        border-right: 1px solid $secondaryClr;
+      }
+      button {
+        @include transition(0.1s);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        border-radius: rem(5);
+        // height: 100%;
+        padding: rem(5);
+        border: none;
+        background: none;
+        &.is-active {
+          background: $secondaryClr;
+          color: $white;
+
+          img {
+            filter: invert(1);
+          }
+        }
+
+        img {
+          height: rem(15);
+          width: rem(15);
+          object-fit: scale-down;
+        }
+      }
+    }
+  }
+}

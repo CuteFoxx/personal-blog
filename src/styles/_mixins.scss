@@ -1,0 +1,76 @@
+@use "variables" as *;
+@use "sass:math";
+
+@function rem($value, $base: 16) {
+  @return math.div($value, $base) + rem;
+}
+@function em($value, $base: 16) {
+  @return math.div($value, $base) + em;
+}
+@mixin container($max-width: rem(1440)) {
+  max-width: $max-width;
+  width: 100%;
+  margin: 0 auto;
+
+  padding: 0 rem(112);
+
+  @include tablet {
+    padding: 0 rem(20);
+  }
+}
+@mixin title($fs: 16, $fw: normal, $lh: $fs, $ls: rem(1), $tt: initial) {
+  font-size: rem($fs);
+  font-weight: $fw;
+  line-height: math.div($lh, $fs);
+  letter-spacing: $ls;
+  text-transform: $tt;
+}
+@mixin regular {
+  font-size: rem(16);
+  line-height: math.div(24, 16);
+}
+@mixin h1 {
+  @include title(rem(200), bold, 1, rem(-5));
+}
+@mixin h2 {
+  @include title(24, 700, 32);
+}
+@mixin h3 {
+  @include title(rem(24), bold, 1.5, rem(4, 8), uppercase);
+}
+@mixin h4 {
+  @include title(rem(20), normal, 1.4, rem(4));
+}
+@mixin h5 {
+  @include title(rem(18), bold, 1.55);
+}
+@mixin h6 {
+  @include title(rem(15), normal, 1.86, rem(3));
+}
+@mixin transition($time: 0.4s) {
+  transition: all $time ease;
+}
+
+@mixin max-width($max-width) {
+  @media (max-width: $max-width) {
+    @content;
+  }
+}
+
+@mixin phoneS {
+  @include max-width($phone) {
+    @content;
+  }
+}
+
+@mixin phone {
+  @include max-width($tablet) {
+    @content;
+  }
+}
+
+@mixin tablet {
+  @include max-width($pc) {
+    @content;
+  }
+}
